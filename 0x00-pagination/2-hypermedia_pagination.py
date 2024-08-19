@@ -52,9 +52,9 @@ class Server:
         """
         returns the hyper media of a page
         """
-        data: List = self.dataset()
+        data: List[List] = self.dataset()
         total: int = (len(data) + page_size - 1) // page_size
-        datafrompage = self.get_page(page, page_size)
+        datafrompage: List[List] = self.get_page(page, page_size)
         return {
             "page_size": len(datafrompage),
             "page": page,
