@@ -40,27 +40,25 @@ class Server:
         return self.__indexed_dataset
 
     def get_hyper_index(self, index: int = None, page_size: int = 10) -> Dict:
-        total = 0
+        """delete safe pagination"""
+        total: int = 0
         client = self.indexed_dataset()
         for i in client.keys():
             total += 1
         indexes = total // (page_size - 1)
         assert index > 0 and index < indexes
         index_copy = index
-        # print(nums)
         data = []
-          
-        while index_copy < index + page_size:
-            if client[index_copy]:
-                # print(client[nums])
+
+        while len(data) < page_size:
+            if index_copy in client:
                 data.append(client[index_copy])
-                index_copy += 1
-            else:
-                pass
+            index_copy += 1
+            # print(index_copy)
 
         return {
             "index": index,
             "data": data,
             "page_size": page_size,
-            "next_index": index + page_size
+            "next_index": index_copy
         }
