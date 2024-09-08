@@ -1,13 +1,13 @@
 #!/usr/bin/python3
 
 """
-1. FIFO caching
+2. LIFO caching
 """
 
 BaseCaching = __import__('0-basic_cache').BaseCaching
 
 
-class FIFOCache(BaseCaching):
+class LIFOCache(BaseCaching):
     """
     Fifo caching
     """
@@ -25,7 +25,7 @@ class FIFOCache(BaseCaching):
             self.cache_data[key] = item
             the_list.append(key)
             if len(the_list) > self.MAX_ITEMS:
-                disc = the_list.pop(0)
+                disc = the_list.pop(-2)
                 del self.cache_data[disc]
                 print(f"DISCARD: {disc}")
 
